@@ -13,4 +13,6 @@ export const MONTHS = {
   12: "décembre",
 };
 
-export const getMonth = (date) => MONTHS[date.getMonth()];
+export const getMonth = (date) => MONTHS[date.getMonth() + 1 ];
+
+// Ajout du +1 pour que le tableau soit compter de 1 à 12 et non de 0 à 11 comme il le fait normalement
