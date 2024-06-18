@@ -25,6 +25,10 @@ const Form = ({ onSuccess, onError }) => {
     setFormData({ ...formData, [name]: value });
   };
 
+  const handleSelectChange = (name, value) => {
+    setFormData({ ...formData, [name]: value });
+  };
+
   // Ajout d'une const de la validation des champs
   const formValid = () => {
     const { nom, prenom, type, email, message } = formData;
@@ -51,6 +55,8 @@ const Form = ({ onSuccess, onError }) => {
     },
     [formData, onSuccess, onError]
   );
+
+
   return (
     <form onSubmit={sendContact}>
       <div className="row">
@@ -64,35 +70,37 @@ const Form = ({ onSuccess, onError }) => {
             required
             />
           <Field 
-          name="prenom"
-          value={formData.prenom}
-          onChange={handleChange}
-          placeholder="" 
-          label="Prénom *" 
-          required
+            name="prenom"
+            value={formData.prenom}
+            onChange={handleChange}
+            placeholder="" 
+            label="Prénom *" 
+            required
           />
           <Select
             name="type"
             value={formData.type}
             selection={["Personnel", "Entreprise"]}
-            onChange={() => null}
+            onChange={(value) => handleSelectChange("type", value)}
             label="Personnel / Entreprise *"
             type="large"
             titleEmpty
             required
           />
           <Field 
-          name="email"
-          value={formData.email}
-          onChange={handleChange}
-          placeholder="" 
-          label="Email *" 
-          required
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            placeholder="" 
+            label="Email *" 
+            required
           />
           <p className="messageInfo">* : champs obligatoires</p>
-          <Button type={BUTTON_TYPES.SUBMIT} disabled= {!formValid() ||sending}>
-            {sending ? "En cours" : "Envoyer"}
-          </Button>
+          {formValid() && (
+            <Button type={BUTTON_TYPES.SUBMIT} disabled={sending}>
+              {sending ? "En cours" : "Envoyer"}
+            </Button>
+          )}
         </div>
         <div className="col">
           <Field
