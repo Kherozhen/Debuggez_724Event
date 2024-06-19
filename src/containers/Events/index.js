@@ -14,24 +14,29 @@ const EventList = () => {
   const [type, setType] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
 
+  // Filtrer par types d'events
   const filteredEvents = (
     (!type
       ? data?.events
       : data?.events.filter(event => event.type === type)) || []
-  ).filter((event, index) => {
-    if (
-      (currentPage - 1) * PER_PAGE <= index &&
-      PER_PAGE * currentPage > index
-    ) {
-      return true;
-    }
-    return false;
-  });
+  );
+
+  // Calcul les events à afficher
+  const paginatedEvents = filteredEvents.slice(
+    (currentPage - 1) * PER_PAGE,
+    currentPage * PER_PAGE
+  );
+
+  // Reinitialiser la page après le choix du type
   const changeType = (evtType) => {
     setCurrentPage(1);
     setType(evtType);
   };
-  const pageNumber = Math.floor((filteredEvents?.length || 0) / PER_PAGE) + 1;
+
+  // Calcul du nombre de page
+  const pageNumber = Math.ceil(filteredEvents.length / PER_PAGE);
+
+  // Génére le filtre par type
   const typeList = new Set(data?.events.map((event) => event.type));
  
   return (
@@ -47,7 +52,7 @@ const EventList = () => {
             onChange={(value) => changeType(value)}
           />
           <div id="events" className="ListContainer">
-            {filteredEvents.map((event) => (
+            {paginatedEvents.map((event) => (
               <Modal key={event.id} Content={<ModalEvent event={event} />}>
                 {({ setIsOpened }) => (
                   <EventCard
@@ -64,7 +69,7 @@ const EventList = () => {
           <div className="Pagination">
             {[...Array(pageNumber || 0)].map((_, n) => (
               // eslint-disable-next-line react/no-array-index-key
-              <a key={n} href="#events" onClick={() => setCurrentPage(n + 1)}>
+              <a key={n} href="#events" onClick={() => setCurrentPage(n + 1)} className={currentPage === n + 1 ? "active-page" : ""}>
                 {n + 1}
               </a>
             ))}

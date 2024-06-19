@@ -1,3 +1,8 @@
 .SelectTitle {
   color: white;
 }
+
+.active-page {
+  border-bottom: 2px solid white;
+  font-weight: bold;
+}
