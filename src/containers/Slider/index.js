@@ -17,7 +17,7 @@ const Slider = () => {
     const interval = setInterval(() => {
       setIndex(prevIndex => (prevIndex + 1) % byDateDesc.length); // changement de diapo toutes les 5s
     }, 5000);
-    return () => clearInterval(interval); // Nettoyage de l'intervalle, important mais je ne sais pas pourquoi, a voir avec Sofiane
+    return () => clearInterval(interval); // Nettoyage de l'intervalle
   }, [byDateDesc]);
 
   return (
@@ -25,7 +25,7 @@ const Slider = () => {
       {byDateDesc?.map((event, idx) => (
         <>
           <div
-            key={event.title}
+            key={event.id}
             className={`SlideCard SlideCard--${
               index === idx ? "display" : "hide"
             }`}
@@ -43,7 +43,7 @@ const Slider = () => {
             <div className="SlideCard__pagination">
               {byDateDesc.map((_, radioIdx) => (
                 <input
-                  key={`${event.id}`}
+                  key={_.date} // clé unique et suit le slide grâce à la date
                   type="radio"
                   name="radio-button"
                   checked={index === radioIdx}
