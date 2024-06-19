@@ -95,7 +95,7 @@ const Form = ({ onSuccess, onError }) => {
             label="Email *" 
             required
           />
-          <p className="messageInfo">* : champs obligatoires</p>
+          <p className="messageInfo">* : Merci de remplir tous les champs avant l&apos;envoi.</p>
           {formValid() && (
             <Button type={BUTTON_TYPES.SUBMIT} disabled={sending}>
               {sending ? "En cours" : "Envoyer"}
