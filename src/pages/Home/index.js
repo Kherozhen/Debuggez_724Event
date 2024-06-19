@@ -122,7 +122,7 @@ const Page = () => {
               title={lastEvent.title}
               date={new Date(lastEvent.date)}
               small
-              label="boom"
+              label={lastEvent.type} // je me suis permise de changer pour que l'event soit plus simple à retrouver dans la liste des events
             />
           ) : (
             <p>Aucune prestation récente disponible.</p>
