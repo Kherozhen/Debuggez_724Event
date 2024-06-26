@@ -21,10 +21,14 @@ const Select = ({
     setCollapsed(true);
     onChange(newValue);
   };
+
+  const id = `select-${name}`;
+  const labelId = `label-${name}`;
+
   return (
     <div className={`SelectContainer ${type}`} data-testid="select-testid">
-      {label && <div className="label">{label}</div>}
-      <div className="Select">
+       {label && <div id={labelId} className="label">{label}</div>}
+      <div className="Select" aria-labelledby={labelId}>
         <ul>
           <li className={collapsed ? "SelectTitle--show" : "SelectTitle--hide"}>
             {value || (!titleEmpty && "Toutes")}
@@ -50,7 +54,7 @@ const Select = ({
             </>
           )}
         </ul>
-        <input type="hidden" value={value || ""} name={name} />
+        <input type="hidden" id={id} value={value || ""} name={name} />
         <button
           type="button"
           data-testid="collapse-button-testid"

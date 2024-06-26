@@ -7,11 +7,14 @@ export const FIELD_TYPES = {
 };
 
 const Field = ({ type = FIELD_TYPES.INPUT_TEXT, label, name, placeholder, value, onChange }) => {
+  const id = `field-${name}`;
+
   let component;
   switch (type) {
     case FIELD_TYPES.INPUT_TEXT:
       component = (
         <input
+          id={id}
           type="text"
           name={name}
           placeholder={placeholder}
@@ -23,17 +26,19 @@ const Field = ({ type = FIELD_TYPES.INPUT_TEXT, label, name, placeholder, value,
       break;
     case FIELD_TYPES.TEXTAREA:
       component = (
-      <textarea 
-        name={name}
-        value={value}
-        onChange={onChange}
-        data-testid="field-testid" 
+        <textarea 
+          id={id}
+          name={name}
+          value={value}
+          onChange={onChange}
+          data-testid="field-testid" 
         />
       );
       break;
     default:
       component = (
         <input
+          id={id}
           type="text"
           name={name}
           placeholder={placeholder}
@@ -46,7 +51,7 @@ const Field = ({ type = FIELD_TYPES.INPUT_TEXT, label, name, placeholder, value,
 
   return (
     <div className="inputField">
-      <span>{label}</span>
+      <label htmlFor={id}>{label}</label>
       {component}
     </div>
   );
@@ -54,19 +59,19 @@ const Field = ({ type = FIELD_TYPES.INPUT_TEXT, label, name, placeholder, value,
 
 Field.propTypes = {
   type: PropTypes.oneOf(Object.values(FIELD_TYPES)),
-  name: PropTypes.string,
+  name: PropTypes.string.isRequired,
   label: PropTypes.string,
   placeholder: PropTypes.string,
-  value: PropTypes.string, // Ajout de propTypes pour value et onChange
+  value: PropTypes.string,
   onChange: PropTypes.func,
 };
+
 Field.defaultProps = {
   label: "",
   placeholder: "",
   type: FIELD_TYPES.INPUT_TEXT,
-  name: "field-name",
-  value: "", // Défaut à une chaîne vide pour éviter les avertissements
-  onChange: () => {}, // Fonction vide par défaut pour onChange
-}
+  value: "",
+  onChange: () => {},
+};
 
 export default Field;
