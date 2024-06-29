@@ -28,7 +28,7 @@ const Button = ({ title, onClick, type, disabled, children }) => {
           disabled={disabled}
           className="Button"
           type="submit"
-          data-testid="button-test-id"
+          data-testid="button-submit"
           value={children}
           onClick={onClick}
           title={title}

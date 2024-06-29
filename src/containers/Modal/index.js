@@ -3,13 +3,13 @@ import { useState } from "react";
 import Icon from "../../components/Icon";
 import "./style.scss";
 
-const Modal = ({ opened, Content, children }) => {
+const Modal = ({ id, opened, Content, children }) => {
   const [isOpened, setIsOpened] = useState(opened);
   return (
     <>
       {children({ isOpened, setIsOpened })}
       {isOpened && (
-        <div className="modal">
+        <div id={id} className="modal">
           <div className="content">
             {Content}
             <button
@@ -28,9 +28,11 @@ const Modal = ({ opened, Content, children }) => {
 
 Modal.defaultProps = {
   opened: false,
+  id: "modal-default",
 }
 
 Modal.propTypes = {
+  id: PropTypes.string,
   opened: PropTypes.bool,
   Content: PropTypes.node.isRequired,
   children: PropTypes.func.isRequired,

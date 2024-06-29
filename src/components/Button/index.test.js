@@ -30,7 +30,7 @@ describe("When a button is created", () => {
   describe("and selected type is submit", () => {
     it("an input submit is created", () => {
       render(<Button type={BUTTON_TYPES.SUBMIT}>label</Button>);
-      const buttonElement = screen.getByTestId("button-test-id");
+      const buttonElement = screen.getByTestId("button-submit");
       expect(buttonElement.type).toEqual("submit");
     });
   });

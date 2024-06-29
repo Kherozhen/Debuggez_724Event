@@ -56,11 +56,8 @@ const Form = ({ onSuccess, onError }) => {
     [formData, onSuccess, onError]
   );
 
-  // Condition pour rendre le bouton visible uniquement en environnement de test
-  const isTestEnv = process.env.NODE_ENV === 'test';
-
   return (
-    <form onSubmit={sendContact}>
+    <form data-testid="your-form-testid" onSubmit={sendContact}>
       <div className="row">
         <div className="col">
           <Field 
@@ -80,6 +77,7 @@ const Form = ({ onSuccess, onError }) => {
             required
           />
           <Select
+            id="type"
             name="type"
             value={formData.type}
             selection={["Personnel", "Entreprise"]}
@@ -98,8 +96,8 @@ const Form = ({ onSuccess, onError }) => {
             required
           />
           <p className="messageInfo">* : Merci de remplir tous les champs avant l&apos;envoi.</p>
-           {/* Condition pour afficher le bouton uniquement en environnement de test */}
-           {(formValid() || isTestEnv) && (
+
+          {(formValid()) && (
             <Button type={BUTTON_TYPES.SUBMIT} disabled={sending}>
               {sending ? "En cours" : "Envoyer"}
             </Button>
