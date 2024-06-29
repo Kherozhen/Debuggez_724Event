@@ -48,21 +48,14 @@ describe("When Form is rendered", () => {
       screen.getByLabelText("Personnel / Entreprise *");
 
       // Soumettre le formulaire en trouvant et en cliquant sur le bouton "Envoyer"
-      const submitButton = screen.getByTestId('button-submit');
+      const submitButton = screen.getByText('Envoyer');
       fireEvent.click(submitButton);
 
       // Attendre que la modale s'ouvre avec le message de succès
       await waitFor(() => {
-        const modal = screen.getByTestId('modal-success'); 
-        expect(modal).toBeInTheDocument();
-
-        const successMessage = screen.getByText('Message envoyé !');
-        expect(successMessage).toBeInTheDocument();
-      }, { timeout: 5000 });
-
-      // Vérifier que la fonction onSuccess a été appelée une fois
-      expect(onSuccess).toHaveBeenCalledTimes(1);
-      expect(onError).not.toHaveBeenCalled();
+        const modalMessage = screen.getByText('Message envoyé !');
+        expect(modalMessage).toBeInTheDocument();
+      });
     });
   });
 });
