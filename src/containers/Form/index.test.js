@@ -10,6 +10,7 @@ describe("When Form is rendered", () => {
     await screen.findByLabelText("Prénom *");
     await screen.findByLabelText("Personnel / Entreprise *");
     await screen.findByLabelText("Email *");
+    await screen.findByLabelText("Message *");
 
   });
 
