@@ -15,7 +15,7 @@ const Slider = () => {
     const interval = setInterval(() => {
       setIndex(prevIndex => (prevIndex + 1) % byDateDesc.length);
     }, 5000);
-    return () => clearInterval(interval);
+    return () => clearInterval(interval);  // Supprime les espaces "blancs"
   }, [byDateDesc]);
 
   return (
@@ -45,7 +45,7 @@ const Slider = () => {
                   type="radio"
                   name="radio-button"
                   checked={index === radioIdx}
-                  readOnly
+                  readOnly // Permet au pagination de suivre les images
                 />
               ))}
             </div>
